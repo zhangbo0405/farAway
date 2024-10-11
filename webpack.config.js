@@ -1,0 +1,39 @@
+const path =require('path')
+
+module.exports={
+    mode:'development',//'production'或者'development'
+    entry:'./src/index.js',//入口文件
+    output:{
+        filename:'bundle.js',//输出文件的名称
+        path:path.resolve(__dirname,'dist'),//输出文件的目录
+    },
+    //...其他配置（如loader和plugins）
+    module:{
+        rules:[
+            {
+                test:/\.jsx?$/,//匹配jsx文件使用babel解析
+                exclude:/node_modules/,
+                use:{
+                    loader:'babel-loader',
+                    options:{
+                        presets:['@babel/preset-env','@babel/preset-react'],
+                    }
+                }
+            },
+            {
+                test:/\.css$/,//匹配样式文件使用style或css-loader解析
+                use:['style-loader','css-loader']
+            },
+            {
+                test:/\.(svg|icon)$/,//匹配svg或者icon等文件使用file-loader解析
+                use:{
+                    loader:'file-loader',
+                    options:{
+                        name:'[name].[ext]',
+                        outputPath:'assets/',
+                    }
+                }
+            }
+        ]
+    }
+}
