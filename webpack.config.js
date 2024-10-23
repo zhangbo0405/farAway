@@ -25,6 +25,18 @@ module.exports={
                 use:['style-loader','css-loader']
             },
             {
+                test:/\.scss$/,
+                use:['style-loader','css-loader','sass-loader']
+            },
+            {
+                test:/\.sass$/,
+                use:['style-loader','css-loader','sass-loader']
+            },
+            {
+                test:/\.less$/,
+                use:['style-loader','css-loader','less-loader']
+            },
+            {
                 test:/\.(svg|icon)$/,//匹配svg或者icon等文件使用file-loader解析
                 use:{
                     loader:'file-loader',
